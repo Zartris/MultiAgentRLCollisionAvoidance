@@ -4,31 +4,32 @@ This repository contains the official implementation of the paper **"Cooperative
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
   <div style="width: 48%; padding: 5px;">
-    <img src="path-to-your-gif1.gif" alt="GIF 1" style="width: 100%;"/>
+    <img src="docs/circle_800x600.gif" alt="GIF 1" style="width: 100%;"/>
   </div>
 
   <div style="width: 48%; padding: 5px;">
-    <img src="path-to-your-gif2.gif" alt="GIF 2" style="width: 100%;"/>
+    <img src="docs/circle_800x600.gif" alt="GIF 2" style="width: 100%;"/>
   </div>
 
   <div style="width: 48%; padding: 5px;">
-    <img src="path-to-your-gif3.gif" alt="GIF 3" style="width: 100%;"/>
+    <img src="docs/circle_800x600.gif" alt="GIF 3" style="width: 100%;"/>
   </div>
 
   <div style="width: 48%; padding: 5px;">
-    <img src="path-to-your-gif4.gif" alt="GIF 4" style="width: 100%;"/>
+    <img src="docs/circle_800x600.gif" alt="GIF 4" style="width: 100%;"/>
   </div>
 </div>
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Citation](#citation)
-- [Links](#links)
-- [Contributing](#contributing)
-- [License](#license)
+- [Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration](#cooperative-multi-agent-collision-avoidance-with-attentive-graph-networks-and-global-path-integration)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Project Structure](#project-structure)
+  - [Links](#links)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Introduction
 
