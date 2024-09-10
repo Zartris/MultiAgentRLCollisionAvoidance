@@ -77,23 +77,6 @@ python3 eval.py --env random
 └── requirements.txt           # Required Python packages
 ```
 
-## Citation
-
-If you use this code in your research, please cite our paper:
-
-**Cooperative multi-agent collision avoidance with attentive graph networks and global path integration**  
-Jonas le Fevre Sejersen, Toyotaro Suzumura, Erdal Kayacan. In *Proceedings of the IEEE International Conference on Robotics and Automation (ICRA), 2025*.
-
-```
-@inproceedings{sejersen2025collision,
-  title={Cooperative multi-agent collision avoidance with attentive graph networks and global path integration},
-  author={Sejersen, Jonas le Fevre and Suzumura, Toyotaro and Kayacan, Erdal},
-  booktitle={2025 IEEE International Conference on Robotics and Automation (ICRA)},
-  year={2025},
-  organization={IEEE}
-}
-```
-
 ## Links
 
 - **Paper**: [Download the paper here](./path-to-your-paper.pdf)  
