@@ -17,6 +17,8 @@ The main contributions of this work include:
 
 ## Table of Contents
 - [Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration](#cooperative-multi-agent-collision-avoidance-with-attentive-graph-networks-and-global-path-integration)
+  - [🚨 **Paper Under Review** 🚨](#-paper-under-review-)
+    - [**Everything will be visible when accepted.**](#everything-will-be-visible-when-accepted)
   - [Table of Contents](#table-of-contents)
   - [Problem Statement](#problem-statement)
   - [Our Solution](#our-solution)
@@ -38,8 +40,17 @@ While many navigation methods are trained with a single goal point, they depend 
 Our approach addresses these challenges by integrating global path planning with local navigation in a more balanced and efficient way. First, we separate the goal point from the global path in the observation space, allowing the network to learn when to prioritize the global path versus immediate local goals. This distinction helps the robot balance its focus, avoiding over-fixation on temporary waypoints and reducing the risk of getting stuck in new local minima.
 
 Additionally, our model uses both raw sensor data for understanding the complexities of the environment and processed data for tracking dynamic objects like neighboring agents. By incorporating attentive graph neural networks, our model efficiently handles interactions with multiple agents. The attention mechanism allows the network to dynamically focus on the most relevant agents in the environment, ensuring that the robot can navigate safely and efficiently even in dense, dynamic scenarios.
+|<img src="docs/lidar_observation.svg" alt="lidar_observation" width="200"/>|<img src="docs/GP_observation.svg" alt="GP_observation" width="200"/>|<img src="docs/GNN_observation.svg" alt="GNN_observation" width="200"/>|
+|--------------------|--------------------|--------------------|
+|<p align=center>Raw lidar and goal observations</p>|<p align=center>Global path observation</p>|<p align=center>Neighborhood observation</p>|
 
+Our approach integrates multiple observation modalities, allowing the network to make informed decisions in dynamic environments. As shown above, the raw LiDAR and goal observations capture the robot's immediate surroundings, while the global path observation ensures adherence to the pre-planned trajectory. The neighborhood observation leverages attentive graph neural networks to track nearby agents, dynamically focusing on the most relevant interactions for collision avoidance.
 
+These observation spaces feed into a comprehensive network architecture that balances local navigation with global objectives, enabling the robot to navigate complex environments efficiently and safely.
+
+|<img src="docs/Network_smaller.svg" alt="Network architecture" width="700"/>|
+|--------------------|
+|<p align=center>Network architecture</p>|
 ## Installation
 
 1. Clone the repository:
