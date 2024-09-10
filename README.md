@@ -40,7 +40,7 @@ While many navigation methods are trained with a single goal point, they depend 
 Our approach addresses these challenges by integrating global path planning with local navigation in a more balanced and efficient way. First, we separate the goal point from the global path in the observation space, allowing the network to learn when to prioritize the global path versus immediate local goals. This distinction helps the robot balance its focus, avoiding over-fixation on temporary waypoints and reducing the risk of getting stuck in new local minima.
 
 Additionally, our model uses both raw sensor data for understanding the complexities of the environment and processed data for tracking dynamic objects like neighboring agents. By incorporating attentive graph neural networks, our model efficiently handles interactions with multiple agents. The attention mechanism allows the network to dynamically focus on the most relevant agents in the environment, ensuring that the robot can navigate safely and efficiently even in dense, dynamic scenarios.
-|<img src="docs/lidar_observation.svg" alt="lidar_observation" width="200"/>|<img src="docs/GP_observation.svg" alt="GP_observation" width="200"/>|<img src="docs/GNN_observation.svg" alt="GNN_observation" width="200"/>|
+|<img src="docs/lidar_observation.svg" alt="lidar_observation" width="200"/>|<img src="docs/GP_observation.svg" alt="GP_observation" width="200"/>|<img src="docs/gnn_observation.svg" alt="GNN_observation" width="200"/>|
 |--------------------|--------------------|--------------------|
 |<p align=center>Raw lidar and goal observations</p>|<p align=center>Global path observation</p>|<p align=center>Neighborhood observation</p>|
 
