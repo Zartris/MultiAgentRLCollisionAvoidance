@@ -2,25 +2,9 @@
 
 This repository contains the official implementation of the paper **"Cooperative multi-agent collision avoidance with attentive graph networks and global path integration"**. This work introduces a novel approach to multi-robot collision avoidance, integrating global path planning with local navigation strategies, utilizing attentive graph neural networks.
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-
-  <div style="flex-basis: 45%; margin: 10px;">
-    <img src="docs/circle_800x600.gif" alt="GIF 1" style="width: 100%;"/>
-  </div>
-
-  <div style="flex-basis: 45%; margin: 10px;">
-    <img src="docs/circle_800x600.gif" alt="GIF 2" style="width: 100%;"/>
-  </div>
-
-  <div style="flex-basis: 45%; margin: 10px;">
-    <img src="docs/circle_800x600.gif" alt="GIF 3" style="width: 100%;"/>
-  </div>
-
-  <div style="flex-basis: 45%; margin: 10px;">
-    <img src="docs/circle_800x600.gif" alt="GIF 4" style="width: 100%;"/>
-  </div>
-
-</div>
+| <img src="docs/circle_800x600.gif" alt="GIF 1" width="400"/> | <img src="docs/circle_800x600.gif" alt="GIF 2" width="400"/> |
+|:---------------------------------------------------------:|:---------------------------------------------------------:|
+| <img src="docs/circle_800x600.gif" alt="GIF 3" width="400"/> | <img src="docs/circle_800x600.gif" alt="GIF 4" width="400"/> |
 ## Table of Contents
 - [Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration](#cooperative-multi-agent-collision-avoidance-with-attentive-graph-networks-and-global-path-integration)
   - [Table of Contents](#table-of-contents)
