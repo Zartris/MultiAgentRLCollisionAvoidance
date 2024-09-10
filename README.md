@@ -24,7 +24,7 @@ This project focuses on the challenge of navigating multiple autonomous robots i
 - The ability to navigate in complex, dynamic environments with noisy sensor data.
 - Superior performance when compared to other baselines like NH-OCRA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
   
-|<img src="docs/LocalMinima_github_800x450.gif" alt="GIF 1" width="500"/>|<img src="docs/GPFocus_github_800x670.gif" alt="GIF 2" width="335"/>|
+|<img src="docs/LocalMinima_github_800x450.gif" alt="GIF 1" width="450"/>|<img src="docs/GPFocus_github_800x670.gif" alt="GIF 2" width="300"/>|
 |-------------------|-------------------|
 
 ## Installation
