@@ -1,15 +1,25 @@
 # Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration
-## 🚨 **Paper Under Review** 🚨
-### **Everything will be visible when accepted.**
-This repository contains the official implementation of the paper **"Cooperative multi-agent collision avoidance with attentive graph networks and global path integration"**. This work introduces a novel approach to multi-robot collision avoidance, integrating global path planning with local navigation strategies, utilizing attentive graph neural networks.
-
 | <img src="docs/doorway_800x600.gif" alt="GIF 1" width="380"/> | <img src="docs/circle_800x600.gif" alt="GIF 2" width="380"/> |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
 | <img src="docs/hallway_800x600.gif" alt="GIF 3" width="380"/> | <img src="docs/random_800x600.gif" alt="GIF 4" width="380"/> |
+## 🚨 **Paper Under Review** 🚨
+### **Everything will be visible when accepted.**
+This repository contains the official implementation of the paper **"Cooperative multi-agent collision avoidance with attentive graph networks and global path integration"**. This work introduces a novel approach to multi-robot collision avoidance, integrating global path planning with local navigation strategies.
+
+The main contributions of this work include:
+- We introduce a local navigation model that incorporates global path information within the observation space, enabling the agent to maintain adherence to pre-planned routes while reacting to dynamic changes in the environment.
+- The model employs graph structures to represent and manage interactions with neighboring agents using attentive graph neural networks, improving the robots’ ability to navigate dense environments.
+- The ability to navigate in complex, dynamic environments with noisy sensor data.
+- Superior performance when compared to other baselines like NH-OCRA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
+
+  
+
+
 ## Table of Contents
 - [Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration](#cooperative-multi-agent-collision-avoidance-with-attentive-graph-networks-and-global-path-integration)
   - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
+  - [Problem Statement](#problem-statement)
+  - [Our Solution](#our-solution)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Project Structure](#project-structure)
@@ -17,15 +27,18 @@ This repository contains the official implementation of the paper **"Cooperative
   - [Contributing](#contributing)
   - [License](#license)
 
-## Introduction
+## Problem Statement
+Multi-robot systems face significant challenges when navigating complex environments without effective global planning. Global planners are essential in predicting efficient paths and guiding robots toward their goals. However, without a global planner, robots can become stuck in local minima, unable to navigate through dense or dynamic environments effectively.
 
-This project focuses on the challenge of navigating multiple autonomous robots in dynamic environments while avoiding collisions. The main contributions of this work include:
-- A local navigation model that integrates global path planning using attentive graph neural networks.
-- The ability to navigate in complex, dynamic environments with noisy sensor data.
-- Superior performance when compared to other baselines like NH-OCRA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
-  
+While many navigation methods are trained with a single goal point, they depend on running waypoints from a global planner to prevent them from becoming trapped in these local minima. The lack of coordination between global objectives and local navigation often results in inefficiencies, as robots focus too narrowly on immediate targets, missing the broader context of the overall path.
 |<img src="docs/LocalMinima_github_800x450.gif" alt="GIF 1" width="450"/>|<img src="docs/GPFocus_github_800x670.gif" alt="GIF 2" width="300"/>|
 |-------------------|-------------------|
+
+## Our Solution
+Our approach addresses these challenges by integrating global path planning with local navigation in a more balanced and efficient way. First, we separate the goal point from the global path in the observation space, allowing the network to learn when to prioritize the global path versus immediate local goals. This distinction helps the robot balance its focus, avoiding over-fixation on temporary waypoints and reducing the risk of getting stuck in new local minima.
+
+Additionally, our model uses both raw sensor data for understanding the complexities of the environment and processed data for tracking dynamic objects like neighboring agents. By incorporating attentive graph neural networks, our model efficiently handles interactions with multiple agents. The attention mechanism allows the network to dynamically focus on the most relevant agents in the environment, ensuring that the robot can navigate safely and efficiently even in dense, dynamic scenarios.
+
 
 ## Installation
 
