@@ -3,19 +3,19 @@
 This repository contains the official implementation of the paper **"Cooperative multi-agent collision avoidance with attentive graph networks and global path integration"**. This work introduces a novel approach to multi-robot collision avoidance, integrating global path planning with local navigation strategies, utilizing attentive graph neural networks.
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <div style="width: 48%; padding: 5px;">
+  <div style="width: 25%; padding: 5px;">
     <img src="docs/circle_800x600.gif" alt="GIF 1" style="width: 100%;"/>
   </div>
 
-  <div style="width: 48%; padding: 5px;">
+  <div style="width: 25%; padding: 5px;">
     <img src="docs/circle_800x600.gif" alt="GIF 2" style="width: 100%;"/>
   </div>
 
-  <div style="width: 48%; padding: 5px;">
+  <div style="width: 25%; padding: 5px;">
     <img src="docs/circle_800x600.gif" alt="GIF 3" style="width: 100%;"/>
   </div>
 
-  <div style="width: 48%; padding: 5px;">
+  <div style="width: 25%; padding: 5px;">
     <img src="docs/circle_800x600.gif" alt="GIF 4" style="width: 100%;"/>
   </div>
 </div>
