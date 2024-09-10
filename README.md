@@ -4,7 +4,7 @@ This repository contains the official implementation of the paper **"Cooperative
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
   <div style="width: 48%; padding: 5px;">
-    <img src="docs/circle_800x600.gif" alt="GIF 1" style="width: 100%;"/>
+    <img src="docs/doorway_400x300.gif" alt="GIF 1" style="width: 100%;"/>
   </div>
 
   <div style="width: 48%; padding: 5px;">
