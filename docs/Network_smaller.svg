@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="673.03064mm"
-   height="243.95805mm"
-   viewBox="0 0 673.03063 243.95806"
+   width="672.92834mm"
+   height="244.36891mm"
+   viewBox="0 0 672.92834 244.36892"
    version="1.1"
    id="svg5"
    xml:space="preserve"
@@ -28,18 +28,18 @@
      inkscape:document-units="mm"
      showgrid="true"
      inkscape:zoom="0.70710678"
-     inkscape:cx="874.69109"
-     inkscape:cy="733.97684"
+     inkscape:cx="1225.4161"
+     inkscape:cy="735.39105"
      inkscape:window-width="3440"
      inkscape:window-height="1417"
      inkscape:window-x="1072"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g12779-7"><inkscape:grid
+     inkscape:current-layer="svg5"><inkscape:grid
        type="xygrid"
        id="grid14177"
-       originx="-18.334687"
-       originy="-12.751324" /></sodipodi:namedview><defs
+       originx="-18.443019"
+       originy="-12.548684" /></sodipodi:namedview><defs
      id="defs2"><inkscape:path-effect
        effect="construct_grid"
        id="path-effect24819"
@@ -610,14 +610,22 @@
        is_visible="true"
        lpeversion="1"
        nr_x="5"
-       nr_y="1" /></defs><g
+       nr_y="1" /></defs><rect
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4.1;stroke-dashoffset:55.3701;stroke-opacity:1;stop-color:#000000"
+     id="rect1038"
+     width="298.21567"
+     height="108.29479"
+     x="163.51186"
+     y="34.930328"
+     inkscape:label="WhiteBackground"
+     transform="matrix(2.2565157,0,0,2.2565157,-368.96707,-78.820835)" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-14.566158,-11.326164)" /><g
+     transform="translate(-14.67449,-11.123524)" /><g
      inkscape:label="Layer 1"
      id="layer1-8"
-     transform="matrix(1.126082,0,0,1.126082,-40.738088,-69.202587)"><g
+     transform="matrix(1.126082,0,0,1.126082,-40.84642,-68.999947)"><g
        id="g13571"
        inkscape:label="graph"
        transform="translate(17.386984,40.882878)"><path

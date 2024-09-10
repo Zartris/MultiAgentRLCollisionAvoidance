@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="110.61103mm"
-   height="98.981522mm"
-   viewBox="0 0 110.61103 98.981523"
+   width="110.53979mm"
+   height="99.936455mm"
+   viewBox="0 0 110.53979 99.936456"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
@@ -28,8 +28,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.9981134"
-     inkscape:cx="-399.25323"
-     inkscape:cy="155.29298"
+     inkscape:cx="-603.63883"
+     inkscape:cy="157.29676"
      inkscape:window-width="3440"
      inkscape:window-height="1417"
      inkscape:window-x="1072"
@@ -39,7 +39,7 @@
   <defs
      id="defs2">
     <rect
-       x="295.05666"
+       x="295.05667"
        y="159.30054"
        width="53.601124"
        height="114.21548"
@@ -199,7 +199,15 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-46.346677,-79.920919)">
+     transform="translate(-46.346676,-79.655838)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4.1;stroke-dashoffset:55.3701;stroke-opacity:1;stop-color:#000000"
+       id="rect1038"
+       width="110.53979"
+       height="99.936455"
+       x="46.346676"
+       y="79.655838"
+       inkscape:label="WhiteBackground" />
     <g
        id="g13571"
        inkscape:label="graph">
@@ -574,7 +582,9 @@
        id="text16691"><tspan
          sodipodi:role="line"
          id="tspan16689"
-         style="stroke-width:0.264583"></tspan></text>
+         style="stroke-width:0.264583"
+         x="90.748154"
+         y="152.02362" /></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,46.346677,79.920919)"

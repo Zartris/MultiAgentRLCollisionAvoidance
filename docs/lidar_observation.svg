@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="136.29062mm"
-   height="119.22529mm"
-   viewBox="0 0 136.29062 119.22529"
+   width="136.96915mm"
+   height="119.80534mm"
+   viewBox="0 0 136.96915 119.80535"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.4115455"
-     inkscape:cx="-43.569265"
-     inkscape:cy="305.33908"
+     inkscape:zoom="0.4990567"
+     inkscape:cx="-1752.3059"
+     inkscape:cy="605.14166"
      inkscape:window-width="3440"
      inkscape:window-height="1417"
      inkscape:window-x="1072"
@@ -121,7 +121,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-46.909005,-59.677151)">
+     transform="translate(-46.747154,-59.568576)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0;stroke-linejoin:round;stroke-miterlimit:4.1;stroke-dashoffset:55.3701;stroke-opacity:1;stop-color:#000000"
+       id="rect1038"
+       width="136.96915"
+       height="119.80534"
+       x="46.747154"
+       y="59.568577"
+       inkscape:label="WhiteBackground"
+       transform="translate(-8.3333332e-7)" />
     <path
        style="fill:none;stroke:#9e9e9e;stroke-width:1.898;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.31"
        d="m 70.554717,193.68559 c 4.368346,0.70037 8.877182,0.5125 13.172121,-0.54885 9.255743,-2.28724 17.227772,-8.59693 22.619082,-16.4604 5.39131,-7.86346 8.35846,-17.19319 9.76238,-26.62342 1.20788,-8.1134 1.30818,-16.35602 2.38503,-24.48785 1.07686,-8.13184 3.22936,-16.34467 8.0429,-22.98667 5.81418,-8.022733 15.10371,-13.058701 24.77047,-15.231875 9.66676,-2.173175 19.74224,-1.710546 29.56454,-0.410017 4.32432,0.572565 8.62748,1.305016 12.89771,2.195352"
@@ -172,18 +181,18 @@
        id="text1365-7-6"><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.161953"
-         x="72.858093"
-         y="84.895485"
+         x="0"
+         y="0"
          id="tspan1450-0">360° lidar</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.161953"
-         x="72.858093"
-         y="95.688026"
+         x="0"
+         y="0"
          id="tspan11323">120 rays</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.161953"
-         x="72.858093"
-         y="106.48058"
+         x="0"
+         y="0"
          id="tspan11325">3.5m radius</tspan></text>
     <text
        xml:space="preserve"
@@ -226,7 +235,7 @@
        inkscape:original-d="M 86.553051,134.74779 C 98.768305,118.72174 111.10826,102.69543 123.38546,86.668845"
        inkscape:label="lidar_ray" />
     <circle
-       style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#28b700;stroke-width:1.5;stroke-dasharray:1.5,1.5;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#28b700;stroke-width:1.5;stroke-dasharray:1.5, 1.5;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
        id="path386"
        cx="86.553047"
        cy="134.7478"
@@ -239,7 +248,7 @@
        r="29.291719"
        inkscape:label="obstacle" />
     <path
-       style="fill:none;stroke:#ff0000;stroke-width:0.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:#ff0000;stroke-width:0.765;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
        d="M 86.538979,134.43068 175.60701,85.920411"
        id="path10467"
        inkscape:path-effect="#path-effect10469"
@@ -294,7 +303,7 @@
        inkscape:path-effect="#path-effect17448"
        inkscape:original-d="m 127.91684,100.71142 c 2.25641,-2.069563 6.76892,-6.208987 6.76892,-6.208987" />
     <path
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#28b800;stroke-width:1.5;stroke-dasharray:1.5,1.5;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#28b800;stroke-width:1.5;stroke-dasharray:1.5, 1.5;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
        id="path16872-0"
        inkscape:label="obstacle"
        sodipodi:type="arc"
