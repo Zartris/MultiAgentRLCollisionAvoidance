@@ -1,4 +1,4 @@
-# Cooperative Multi-Agent Collision Avoidance with Attentive Graph Networks and Global Path Integration
+# Global Path Integration and Attentive Graph Networks for Multi-Agent Collision Avoidance
 | <img src="docs/doorway_800x600.gif" alt="GIF 1" width="380"/> | <img src="docs/circle_800x600.gif" alt="GIF 2" width="380"/> |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
 | <img src="docs/hallway_800x600.gif" alt="GIF 3" width="380"/> | <img src="docs/random_800x600.gif" alt="GIF 4" width="380"/> |
