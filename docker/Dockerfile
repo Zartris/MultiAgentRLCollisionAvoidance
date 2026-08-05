@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# MALP Development Container
+# GIANT Development Container
 FROM nvidia/cuda:12.8.1-cudnn-runtime-ubuntu24.04
 
 # ── Build args ──────────────────────────────────────────────────────

@@ -95,7 +95,7 @@ def report_profile() -> None:
         return
     _reported = True
     width = max((len(k) for k in _times), default=10)
-    print("\n===== MALP PROFILE (wall seconds, cuda-synced) =====")
+    print("\n===== GIANT PROFILE (wall seconds, cuda-synced) =====")
     for name, t in sorted(_times.items(), key=lambda kv: -kv[1]):
         n = _counts[name]
         print(f"  {name:<{width}}  {t:9.2f}s   {n:>6} calls   {t / max(n, 1) * 1e3:8.1f} ms/call")
