@@ -19,6 +19,7 @@ The main contributions of this work include:
 - [Baselines](#baselines)
 - [Project Structure](#project-structure)
 - [Links](#links)
+- [Citation](#citation)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -165,6 +166,8 @@ xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 
 - **Paper**: [Download the paper here](https://arxiv.org/pdf/2603.04659) [or here](https://ieeexplore.ieee.org/document/11246312)
 - **Video**: [Watch the presentation video here](https://www.youtube.com/watch?v=42iTlEm0_Bk)
+
+## Citation
 
 If you use this repository or build upon this work, please cite the following paper:
 ```
