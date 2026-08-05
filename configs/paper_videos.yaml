@@ -24,7 +24,8 @@ save_video: true
 output_dir: null             # null -> current working directory
 
 # --- Advanced: deep overrides merged into the base `config` dict -------------
-config: {}
+config:
+  gnn_attention: emb
 
 # --- Advanced: per-scenario overrides merged into `scenario_config` ----------
 scenario_config: {}

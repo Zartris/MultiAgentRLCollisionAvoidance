@@ -59,12 +59,20 @@ These observation spaces feed into a comprehensive network architecture that bal
    pip install -r requirements.txt
    ```
 
-3. Headless machines: the simulator (VMAS) opens an X display at import time. Prefix training/evaluation commands with `xvfb-run -a`, or start a persistent virtual display:
+3. Install the native libraries required by VMAS and the RVO2 baseline:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y build-essential libgl1 libglu1-mesa libglib2.0-0 xvfb
+   ```
+
+   `xvfb` provides the virtual display, but it does not provide GLU. The `libglu1-mesa` package is required because VMAS imports pyglet's OpenGL renderer at startup.
+
+4. Headless machines: the simulator (VMAS) opens an X display at import time. Prefix training/evaluation commands with `xvfb-run -a`, or start a persistent virtual display:
    ```bash
    Xvfb :99 -screen 0 1280x1024x24 & export DISPLAY=:99
    ```
 
-4. Alternatively use the Docker environment — see [`docker/README.md`](docker/README.md).
+5. Alternatively use the Docker environment — see [`docker/README.md`](docker/README.md). The Dockerfile installs the native OpenGL and Xvfb packages automatically.
 
 Verify the install without a GPU or display:
 ```bash

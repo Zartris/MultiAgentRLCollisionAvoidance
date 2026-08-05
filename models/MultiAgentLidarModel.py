@@ -425,7 +425,7 @@ class LocalNavigationGraphNetDist(LocalNavigationNetBase):
         std_max=-1,
         std_min=1e-7,
         device="cpu",
-        gnn_attention="none",
+        gnn_attention="emb",
         **kwargs,
     ):
         super().__init__(
@@ -949,7 +949,7 @@ class MultiAgentLocalNavNet(MultiAgentNetBase):
         self.std_max = std_max
         self.std_min = kwargs.get("std_min", 1e-7)
         self.gnn_emb_size = kwargs.get("gnn_emb_size", None)
-        self.gnn_attention = kwargs.get("gnn_attention", "none")
+        self.gnn_attention = kwargs.get("gnn_attention", "emb")
 
         # all the self. variables are used in the _build_single_net method so they need to be defined before calling it
         super(MultiAgentLocalNavNet, self).__init__(

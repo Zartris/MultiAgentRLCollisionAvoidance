@@ -100,7 +100,7 @@ def make_network(env, cfg, model_path, load_only_model, device):
             device=device,
             std_max=cfg.get("ppo").get("std_max_start", -1.0),  # -1.0 means no max
             std_min=cfg.get("ppo").get("std_min", 1e-7),  # floor on policy std
-            gnn_attention=cfg.get("gnn_attention", "none"),
+            gnn_attention=cfg.get("gnn_attention", "emb"),
         )
         critic_net = MultiAgentLocalNavNet(
             base_net=cfg.get("model"),
@@ -117,7 +117,7 @@ def make_network(env, cfg, model_path, load_only_model, device):
             set_gp_as_goal=cfg.get("set_gp_as_goal", False),
             dynamics=dynamics,
             device=device,
-            gnn_attention=cfg.get("gnn_attention", "none"),
+            gnn_attention=cfg.get("gnn_attention", "emb"),
         )
     else:
         raise ValueError("Invalid model")
