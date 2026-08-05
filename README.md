@@ -81,21 +81,52 @@ python3 -m pytest tests/test_config.py tests/test_config_examples.py tests/test_
 
 ## Usage
 
-Start training from a declarative YAML config (`configs/baseline.yaml`, `curriculum.yaml`, `smoke.yaml`, `finetune_attention.yaml`):
+Start standard from-scratch training with the full-fidelity baseline config:
 ```bash
 xvfb-run -a python3 -m train.LidarSingleStep --config configs/baseline.yaml
 ```
 Training logs to the Weights & Biases project `giant` when `WANDB_API_KEY` is set in the environment, and falls back to file logging otherwise.
 
-Evaluate a trained model (the evaluation config is set inside the script — edit it there if needed):
+For a quick installation and configuration check, run the small smoke test:
 ```bash
-xvfb-run -a python3 -m evaluate.eval_LidarSingleStep
+xvfb-run -a python3 -m train.LidarSingleStep --config configs/smoke.yaml
+```
+
+For adaptive multi-stage training, use the curriculum config:
+```bash
+xvfb-run -a python3 -m train.LidarSingleStep --config configs/curriculum.yaml
+```
+
+The attention-enabled model uses `gnn_attention: emb` by default. The
+`configs/finetune_attention.yaml` config is for fine-tuning an existing
+checkpoint, not for starting a new training run.
+
+Evaluate the trained model across the paper scenarios and agent-count sweeps defined in
+`configs/eval.yaml`:
+```bash
+xvfb-run -a python3 -m evaluate.eval_LidarSingleStep \
+   --config configs/eval.yaml \
+   --checkpoint models/checkpoints/ours/OurGraphModel.pth \
+   --no-video \
+   --output-dir results/eval
+```
+
+For some of the higher agent environments might be crashing out, use fewer parallel environments by overwriting and targeting a specific scenario:
+```bash
+xvfb-run -a python3 -m evaluate.eval_LidarSingleStep \
+   --config configs/eval.yaml \
+   --checkpoint models/checkpoints/ours/OurGraphModel.pth \
+   --scenario random \
+   --num-agents 40 \
+   --num-eval-envs 4 \
+   --no-video \
+   --output-dir results/eval_random_40
 ```
 
 Print a comparison table of selected results, or regenerate the paper videos:
 ```bash
 python3 -m evaluate.compare_models
-xvfb-run -a python3 -m evaluate.paper_videos
+xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 ```
 
 ## Baselines
