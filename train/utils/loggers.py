@@ -45,7 +45,7 @@ class NoOpLogger:
     """
 
     def __init__(self, save_dir: Optional[Union[str, Path]] = None):
-        self.save_dir = Path(save_dir) if save_dir else Path("/tmp/malp_noop")
+        self.save_dir = Path(save_dir) if save_dir else Path("/tmp/giant_noop")
 
     def log_scalar(self, name: str, value: Any, step: Optional[int] = None) -> None:  # noqa: D401
         return None

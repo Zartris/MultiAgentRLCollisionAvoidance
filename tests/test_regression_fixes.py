@@ -1,4 +1,4 @@
-"""Forward-looking regression guards for the fixes landed in fix/code-review-blockers.
+"""Regression guards for previously fixed bugs.
 
 Every test here calls the real function / imports the real module and asserts an
 externally-visible behavior. Tests that only re-implemented the 1-3 lines of the fix

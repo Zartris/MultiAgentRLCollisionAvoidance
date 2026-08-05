@@ -1,5 +1,5 @@
 services:
-  malp:
+  giant:
     build:
       context: ..
       dockerfile: docker/Dockerfile
@@ -7,8 +7,8 @@ services:
         USERNAME: ${USER}
         USER_UID: ${UID:-1000}
         USER_GID: ${GID:-1000}
-    image: malp-dev
-    container_name: malp-sandbox
+    image: giant-dev
+    container_name: giant-sandbox
     volumes:
       # Mount project files
       - ..:/repo

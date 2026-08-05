@@ -13,7 +13,7 @@ class MyWandbLogger(WandbLogger):
         exp_name: Optional[str],
         save_dir: Optional[Union[Path, str]],
         id: Optional[str],
-        project_name: str = "malp",
+        project_name: str = "giant",
         offline: bool = False,
         config: Optional[dict] = None,
         **kwargs,
@@ -35,7 +35,7 @@ class MyWandbLogger(WandbLogger):
 
     @staticmethod
     def get_log_variables_from_checkpoint(
-        checkpoint_path: Union[str, Path], project_name: str = "malp"
+        checkpoint_path: Union[str, Path], project_name: str = "giant"
     ):
         if isinstance(checkpoint_path, str):
             checkpoint_path = Path(checkpoint_path)
@@ -50,7 +50,7 @@ class MyWandbLogger(WandbLogger):
         return exp_name, save_dir, id
 
     @staticmethod
-    def get_id_from_experience(exp_name: str, project_name: str = "malp"):
+    def get_id_from_experience(exp_name: str, project_name: str = "giant"):
         import wandb
 
         api = wandb.Api()

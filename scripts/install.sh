@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Reproducible native install for malp.
+# Reproducible native install for GIANT.
 #
 # Creates a project-local .venv, installs the pinned Python dependencies, and
 # builds the Python-RVO2 baseline. RVO2 needs `--no-build-isolation` because its

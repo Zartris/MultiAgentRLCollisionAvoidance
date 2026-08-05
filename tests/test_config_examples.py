@@ -1,8 +1,7 @@
 """Smoke coverage for every YAML under configs/.
 
 Ensures that each example file can be loaded + merged with the defaults without
-producing an obviously-broken config. This is the "configs/examples won't drift"
-guard called out in plan.md §Decisions.
+producing an obviously-broken config.
 """
 from __future__ import annotations
 

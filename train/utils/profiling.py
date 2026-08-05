@@ -1,12 +1,12 @@
 """Lightweight, opt-in wall-clock phase profiler.
 
-Enabled only when env var ``MALP_PROFILE`` is truthy, so it is a no-op in normal
+Enabled only when env var ``GIANT_PROFILE`` is truthy, so it is a no-op in normal
 runs. Times are accumulated per named phase at the *call boundary*, which is the
 right granularity here because the hot planner is numba ``@njit`` (opaque to
 cProfile/py-spy) — we can still measure how much wall time is spent inside it.
 
 GPU work is async, so each phase boundary calls ``torch.cuda.synchronize()``
-(unless ``MALP_PROFILE_CUDA_SYNC=0``) to attribute GPU time honestly.
+(unless ``GIANT_PROFILE_CUDA_SYNC=0``) to attribute GPU time honestly.
 
 Usage::
 
@@ -24,8 +24,8 @@ import os
 import time
 from collections import defaultdict
 
-_ENABLED = os.environ.get("MALP_PROFILE", "").lower() not in ("", "0", "false", "no")
-_SYNC = os.environ.get("MALP_PROFILE_CUDA_SYNC", "1").lower() not in ("0", "false", "no")
+_ENABLED = os.environ.get("GIANT_PROFILE", "").lower() not in ("", "0", "false", "no")
+_SYNC = os.environ.get("GIANT_PROFILE_CUDA_SYNC", "1").lower() not in ("0", "false", "no")
 
 _times: dict[str, float] = defaultdict(float)
 _counts: dict[str, int] = defaultdict(int)

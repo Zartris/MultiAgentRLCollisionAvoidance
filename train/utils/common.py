@@ -1010,10 +1010,10 @@ def PPOTrainer(
         # faster training does NOT shrink the collector chunk / slow collection.
         num_collect_chunks = collect_chunks if collect_chunks is not None else minibatch_size
         collector_exhausted = False
-        # Gated op-level profile of collection (MALP_COLLECT_PROF=1): shows whether
+        # Gated op-level profile of collection (GIANT_COLLECT_PROF=1): shows whether
         # collector.next time is env-step (vmas physics / lidar raycast), policy
         # forward (conv/GNN), or planner resets.
-        _cp = bool(os.environ.get("MALP_COLLECT_PROF"))
+        _cp = bool(os.environ.get("GIANT_COLLECT_PROF"))
         _cp_prof, _cp_n = None, 0
         if _cp:
             from torch.profiler import profile as _cpf, ProfilerActivity as _cPA
@@ -1080,18 +1080,18 @@ def PPOTrainer(
 
         start_time = time.perf_counter()
         print("training... ")
-        # Gated per-step training breakdown (cuda-synced). MALP_TORCH_PROF=1 only.
+        # Gated per-step training breakdown (cuda-synced). GIANT_TORCH_PROF=1 only.
         # Reveals where the PPO-update time goes: sample/h2d/forward/backward/log/optim.
-        _tp = bool(os.environ.get("MALP_TORCH_PROF"))
+        _tp = bool(os.environ.get("GIANT_TORCH_PROF"))
         _tp_acc = {"sample": 0.0, "h2d": 0.0, "forward": 0.0, "backward": 0.0, "log": 0.0, "optim": 0.0}
         _tp_n, _tp_warmup, _tp_active = 0, 5, 40
         # bf16/fp16 autocast for the PPO forward/backward. From the `amp_dtype` arg
-        # (config perf.amp_dtype); MALP_AMP env overrides for ad-hoc testing.
-        _amp_key = os.environ.get("MALP_AMP") or (amp_dtype or "")
+        # (config perf.amp_dtype); GIANT_AMP env overrides for ad-hoc testing.
+        _amp_key = os.environ.get("GIANT_AMP") or (amp_dtype or "")
         _amp_dtype = {"bf16": th.bfloat16, "fp16": th.float16}.get(_amp_key)
-        _verify_prec = bool(os.environ.get("MALP_VERIFY_PREC"))
-        # Gated op-level profile (MALP_OP_PROF=1): aten-op CUDA breakdown of fwd+bwd.
-        _op = bool(os.environ.get("MALP_OP_PROF"))
+        _verify_prec = bool(os.environ.get("GIANT_VERIFY_PREC"))
+        # Gated op-level profile (GIANT_OP_PROF=1): aten-op CUDA breakdown of fwd+bwd.
+        _op = bool(os.environ.get("GIANT_OP_PROF"))
         _op_prof, _op_n = None, 0
         if _op:
             from torch.profiler import profile as _pf, ProfilerActivity as _PA, schedule as _sch
@@ -1324,7 +1324,7 @@ def make_logger(load_model, load_only_model, config):
         "exp_name": None,
         "save_dir": None,
         "id": None,
-        "project_name": "malp",
+        "project_name": "giant",
         "offline": False,
         "config": config,
     }

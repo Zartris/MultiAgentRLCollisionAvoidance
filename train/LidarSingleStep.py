@@ -298,7 +298,7 @@ def run_training(cfg: dict) -> None:
         storage = LazyMemmapStorage(
             frames_per_batch,
             # Namespace by PID so concurrent runs don't share/corrupt one scratch dir.
-            scratch_dir=os.path.join(tempfile.gettempdir(), f"malp_memmap_{os.getpid()}"),
+            scratch_dir=os.path.join(tempfile.gettempdir(), f"giant_memmap_{os.getpid()}"),
             device=storing_device,
             existsok=True,
         )
@@ -321,7 +321,7 @@ def run_training(cfg: dict) -> None:
         return LazyMemmapStorage(
             fpb,
             # Namespace by PID so concurrent runs don't share/corrupt one scratch dir.
-            scratch_dir=os.path.join(tempfile.gettempdir(), f"malp_memmap_{os.getpid()}"),
+            scratch_dir=os.path.join(tempfile.gettempdir(), f"giant_memmap_{os.getpid()}"),
             device=storing_device, existsok=True,
         )
 
