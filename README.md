@@ -166,7 +166,7 @@ xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 - **Paper**: [Download the paper here](https://arxiv.org/pdf/2603.04659) [or here](https://ieeexplore.ieee.org/document/11246312)
 - **Video**: [Watch the presentation video here](https://www.youtube.com/watch?v=42iTlEm0_Bk)
 
-If you like this or use it please cite my paper:
+If you use this repository or build upon this work, please cite the following paper:
 ```
 @inproceedings{lefevre2025giant,
   author    = {le Fevre Sejersen, Jonas and Suzumura, Toyotaro and Kayacan, Erdal},
@@ -180,6 +180,7 @@ If you like this or use it please cite my paper:
   doi       = {10.1109/IROS60139.2025.11246312}
 }
 ```
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request with any improvements or bug fixes. For major changes, please open an issue first to discuss what you would like to change.
