@@ -109,7 +109,7 @@ python3 eval.py --env random
 
 ## Links
 
-- **Paper**: [Download the paper here](./path-to-your-paper.pdf)  
+- **Paper**: [Download the paper here](https://arxiv.org/pdf/2603.04659)  
 - **Video**: [Watch the presentation video here](https://www.youtube.com/watch?v=42iTlEm0_Bk)
 
 ## Contributing
