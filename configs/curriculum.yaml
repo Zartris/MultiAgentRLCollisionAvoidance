@@ -1,0 +1,130 @@
+# Adaptive curriculum training config.
+#
+# Each level under `curriculum.levels` is a set of CONFIG OVERRIDES applied on top
+# of the base config, then the env is rebuilt. So a level can switch scenario_type
+# (e.g. a pure "random" env), resize a single scenario, or define a full multi
+# mix. Training starts at level 0; it ADVANCES when eval success_rate >=
+# advance.threshold for advance.patience evals, and DEMOTES a level if eval reward
+# drops below demote.threshold. The policy/optimizer carry across levels.
+#
+# Run:  python -m train.LidarSingleStep --config configs/curriculum.yaml
+# Customize: add/remove/reorder levels; each level's keys are plain cfg overrides.
+
+logging_backend: wandb       # dashboard + videos; uses ~/.netrc auth (file = local fallback)
+num_eval_envs: 16
+gnn_attention: emb
+video_every: 20              # eval video ~every 20 iters (~1 per curriculum level)
+# Reward rebalance to kill the freeze optimum (see freeze history below). Once the
+# truncation-as-termination bug was fixed, GAE correctly bootstraps timeouts, which
+# makes a frozen state's value only ~time_penalty/(1-gamma) — too cheap, so the agent
+# froze in one update. Two levers:
+#  - time_penalty -0.03/step: with bootstrapping the freeze value is ~-3, a real cost.
+#  - collision_penalty -10 (was -25, == final_reward): a goal-run is now clearly +EV
+#    even with some collision risk, so moving beats freezing. Safety is still enforced
+#    by the advance gate (collision_rate <= 0.05) before any level-up.
+time_penalty: -0.03
+# Collision penalty sweet spot. -10 baked in too little caution for dense scenes; -25
+# made agents over-cautious (timeouts); -15 let collisions back into the 40-agent
+# circle. -20 is collision-free across all eval scenarios without inducing timeouts.
+collision_penalty: -20
+# OPTIONAL FINE-TUNE / POLISH phase — NOT for from-scratch training. A clean L0->L3
+# run needs the full exploration schedule from train/config.py (std_max_start 0.5,
+# decay 250); enabling this low ceiling from scratch would starve exploration. AFTER a
+# curriculum run has nearly solved L3, RESUME from that checkpoint with this block
+# uncommented to refine the policy around its peak (near-deterministic training-time
+# actions) instead of letting it wander/oscillate. This polish pass is what produced
+# the published model that is collision-free on all 12 eval configs.
+# ppo:
+#   std_max_start: 0.08
+#   std_max_end: 0.05
+#   std_max_decay_steps: 15
+perf:
+  amp_dtype: bf16            # bf16 training speed win; remove for fp32
+
+curriculum:
+  enabled: true
+  start_level: 0
+  min_iters_per_level: 20    # give each level a fair shot before switching
+  # ADVANCE only when the level is BOTH solved AND collision-clean.
+  advance:
+    patience: 2              # both conditions hold for this many consecutive evals
+    conditions:
+      - {metric: success_rate,   op: ">=", threshold: 0.70}   # >=70% reach goals
+      - {metric: collision_rate, op: "<=", threshold: 0.05}   # <=0.05 collisions/agent
+  # DEMOTE if it's failing badly at the current level.
+  demote:
+    patience: 1
+    conditions:
+      - {metric: reward, op: "<", threshold: -25.0}
+
+  levels:
+    # ---- Level 0: ONE agent — learn to follow the global path around static
+    # obstacles (no peers; the GNN peer-attention is dormant here). ----
+    # num_worlds per level: small/cheap levels can run many more parallel worlds
+    # for throughput + data diversity; the heavy L3 uses fewer to fit GPU memory.
+    - name: L0_single_path_follow
+      scenario_type: random
+      num_worlds: 300
+      num_agents: 1
+      num_obstacles: 3
+      obstacle_size: 1
+      world_size: 7
+
+    # ---- Level 1: multiple agents in random — add dynamic peer avoidance ----
+    - name: L1_random_multi
+      scenario_type: random
+      num_worlds: 200
+      num_agents: 8
+      num_obstacles: 4
+      obstacle_size: 1
+      world_size: 10
+
+    # ---- Level 2: all scenarios (doorway/corridor/hallway/room/circle/...) ----
+    - name: L2_multi_scenario
+      scenario_type: multi
+      num_worlds: 150
+      multi_config:
+        random:   {num_agents: 8,  num_obstacles: 4, obstacle_size: 1, world_size: 8}
+        circle:   {num_agents: 8,  spawn_mode: equally_spaced, world_size: 8}
+        plus:     {num_agents: 4}
+        doorway:  {num_agents: 5,  world_size: 8}
+        corridor: {num_agents: 5}
+        hallway:  {num_agents: 8,  world_size: 8}
+        room:     {num_agents: 8,  num_obstacles: 10, world_size: 8}
+      # Evaluate on the SAME scenarios L2 trains on. Without this, merge_overrides keeps
+      # the base default multi_config_eval (40-agent circle, world 15 — L3 difficulty),
+      # so L2 would be judged on much harder scenes than it trains on and could never
+      # fairly pass the advance gate.
+      multi_config_eval:
+        random:   {num_agents: 8,  num_obstacles: 4, obstacle_size: 1, world_size: 8}
+        circle:   {num_agents: 8,  spawn_mode: equally_spaced, world_size: 8}
+        plus:     {num_agents: 4}
+        doorway:  {num_agents: 5,  world_size: 8}
+        corridor: {num_agents: 5}
+        hallway:  {num_agents: 8,  world_size: 8}
+        room:     {num_agents: 8,  num_obstacles: 10, world_size: 8}
+
+    # ---- Level 3: full-size, dense crowds (the hard target) ----
+    - name: L3_large_dense
+      scenario_type: multi
+      num_worlds: 100
+      multi_config:
+        random:   {num_agents: 20, num_obstacles: 8, obstacle_size: 1, world_size: 15}
+        # Train the circle at 24 agents / 10m — the paper's proven recipe (the original
+        # model trained at 24/10m generalized to ~5% collision at the 40-agent eval).
+        # Was 15-agent here, which left the policy failing the 40-agent eval (train/eval
+        # gap). 24/10m is the right density to learn stop/yield + path-deviation.
+        circle:   {num_agents: 24, spawn_mode: equally_spaced, world_size: 10}
+        plus:     {num_agents: 4}
+        doorway:  {num_agents: 10, world_size: 15}
+        corridor: {num_agents: 5}
+        hallway:  {num_agents: 8,  world_size: 10}
+        room:     {num_agents: 8,  num_obstacles: 10, world_size: 10}
+      multi_config_eval:
+        random:   {num_agents: 20, num_obstacles: 6, obstacle_size: 1, world_size: 10}
+        circle:   {num_agents: 40, spawn_mode: equally_spaced, world_size: 15}
+        plus:     {num_agents: 4}
+        doorway:  {num_agents: 5,  world_size: 10}
+        corridor: {num_agents: 5}
+        hallway:  {num_agents: 8,  world_size: 10}
+        room:     {num_agents: 8,  num_obstacles: 10, world_size: 10}

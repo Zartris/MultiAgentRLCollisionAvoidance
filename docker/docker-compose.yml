@@ -1,0 +1,41 @@
+services:
+  giant:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        USERNAME: ${USER}
+        USER_UID: ${UID:-1000}
+        USER_GID: ${GID:-1000}
+    image: giant-dev
+    container_name: giant-sandbox
+    volumes:
+      # Mount project files
+      - ..:/repo
+      # X11 socket — lets GUI code (vmas/pyglet rendering, matplotlib
+      # plt.show(), etc.) display on the host's X server. Harmless if
+      # unused; requires `xhost +local:docker` on the host once per
+      # session so the container is allowed to connect.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      # Inherited from the host shell at `docker compose up` time.
+      # ${DISPLAY:-} keeps the var empty (not unset) if you're on a
+      # headless host; GUI code then falls back to xvfb-run as usual.
+      - DISPLAY=${DISPLAY:-}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true
+    working_dir: /repo
+    # Secrets and per-host config live in docker/.env (gitignored).
+    # Every key in that file lands in the container's env. Start from
+    # docker/.env.example if you don't have one yet. Marked `required:
+    # false` so the compose file is still usable before you create .env.
+    env_file:
+      - path: .env
+        required: false

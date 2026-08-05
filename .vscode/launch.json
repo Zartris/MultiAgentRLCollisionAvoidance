@@ -1,0 +1,58 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: LidarSingleStep",
+            "type": "python",
+            "request": "launch",
+            "module": "train.LidarSingleStep",
+            "args": ["--config", "configs/baseline.yaml"],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: LidarSingleStep.py (No Debug)",
+            "type": "python",
+            "request": "launch",
+            "module": "train.LidarSingleStep",
+            "args": ["--config", "configs/baseline.yaml"],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "noDebug": true
+        },
+        {
+            "name": "Python: LidarSingleStep with profiler",
+            "type": "python",
+            "request": "launch",
+            "module": "cProfile",
+            "args": [
+                "-o", "/tmp/tmp.prof", "-m", "train.LidarSingleStep",
+                "--config", "configs/baseline.yaml"
+            ]
+        },
+        {
+            "name": "Python: eval_LidarSingleStep",
+            "type": "python",
+            "request": "launch",
+            "module": "evaluate.eval_LidarSingleStep",
+            "args": [
+                "--config", "configs/eval.yaml",
+                "--checkpoint", "models/checkpoints/ours/OurGraphModel.pth",
+                "--no-video"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        { // make one for debugging current file
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}

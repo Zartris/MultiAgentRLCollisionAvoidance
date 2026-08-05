@@ -1,0 +1,48 @@
+# Fine-tune the corrected `emb` peer-attention on top of a model that was trained
+# while the attention gate was a no-op. The old checkpoint's weights are loaded,
+# the new `node_attention_emb` layer is left at its random init, the two lidar
+# encoders are frozen, and the GNN + attention + heads retrain with a fresh
+# optimizer.
+#
+# Run:
+#   python -m train.LidarSingleStep --config configs/finetune_attention.yaml
+#   # (equivalently: --finetune models/checkpoints/ours/OurGraphModel.pth)
+#
+# num_lidar_rays stays 120 — it must match the checkpoint's lidar encoders AND
+# the real lidar we mimic. Do not change it.
+
+gnn_attention: emb
+
+# Goal: kill deadlocks + make agents faster/more decisive (collisions are already
+# ~0). Judge via stuck/success/time-to-goal/velocity, not collisions.
+
+# 150 eval envs for accurate rare-event (deadlock) metrics. Metrics every 10 iters
+# (no render -> fast); render 1 video only every 50 iters.
+num_eval_envs: 16
+eval_every: 10
+video_every: 50
+save_video_to_disk: true
+render_env_index: [0]
+
+finetune: true
+finetune_freeze: [lidar_static_encoder, lidar_dynamic_encoder]
+load_only_model: true                                  # fresh optimizer
+load_model: models/checkpoints/ours/OurGraphModel.pth
+
+ppo:
+  # Clip-PPO (the paper's loss, GIANT Table I "clip 0.2"). The repo default is
+  # kl_pen_ppo, whose beta*KL term DIVERGES to inf when fine-tuning an already-
+  # converged policy (the importance ratio runs away). Clip self-limits the step,
+  # so it stays stable. critic_lr 4e-4 comes from the default ppo block.
+  loss_module: clip
+  clip_epsilon: 0.2
+  # Exploration, BOUNDED. Fine-tuning a converged policy needs exploration to find
+  # better coordination, but entropy=1e-2 with no std ceiling exploded the std
+  # (0.12->3.0, attempt 7). So: gentler entropy 1e-3 + std clamped to [0.1, 0.5]
+  # (floor std_min, ceiling std_max constant — the clamp is now re-enabled in the
+  # model). std can't collapse OR explode.
+  entropy_eps_start: 0.001
+  entropy_eps_end: 0.001
+  std_min: 0.1
+  std_max_start: 0.3
+  std_max_end: 0.3

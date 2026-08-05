@@ -2,7 +2,7 @@
 | <img src="docs/doorway_800x600.gif" alt="GIF 1" width="380"/> | <img src="docs/circle_800x600.gif" alt="GIF 2" width="380"/> |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
 | <img src="docs/hallway_800x600.gif" alt="GIF 3" width="380"/> | <img src="docs/random_800x600.gif" alt="GIF 4" width="380"/> |
-## 🚨 **Code comming soon** 🚨
+
 This repository contains the official implementation of the paper **"GIANT - Global Path Integration and Attentive Graph Networks for Multi-Agent Trajectory Planning"**. This work introduces a novel approach to multi-robot collision avoidance, integrating global path planning with local navigation strategies.
 
 The main contributions of this work include:
@@ -11,21 +11,16 @@ The main contributions of this work include:
 - The ability to navigate in complex, dynamic environments with noisy sensor data.
 - Superior performance when compared to other baselines like NH-OCRA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
 
-  
-
-
 ## Table of Contents
-- [GIANT - Global Path Integration and Attentive Graph Networks for Multi-Agent Trajectory Planning](#giant---global-path-integration-and-attentive-graph-networks-for-multi-gent-trajectory-planning)
-  - [🚨 **Code comming soon** 🚨](#code-comming-soon)
-  - [Table of Contents](#table-of-contents)
-  - [Problem Statement](#problem-statement)
-  - [Our Solution](#our-solution)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Project Structure](#project-structure)
-  - [Links](#links)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Problem Statement](#problem-statement)
+- [Our Solution](#our-solution)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Baselines](#baselines)
+- [Project Structure](#project-structure)
+- [Links](#links)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Problem Statement
 Multi-robot systems face significant challenges when navigating complex environments without effective global planning. Global planners are essential in predicting efficient paths and guiding robots toward their goals. However, without a global planner, robots can become stuck in local minima, unable to navigate through dense or dynamic environments effectively.
@@ -49,67 +44,126 @@ These observation spaces feed into a comprehensive network architecture that bal
 |<img src="docs/Network_smaller.svg" alt="Network architecture" width="700"/>|
 |--------------------|
 |<p align=center>Network architecture</p>|
+
 ## Installation
 
-1. Clone the repository:
+1. Clone with submodules:
    ```bash
-   git clone https://github.com/your-repo/collision-avoidance.git
-   cd collision-avoidance
+   git clone --recurse-submodules https://github.com/Zartris/GIANT_MultiAgentRLCollisionAvoidance.git
+   cd GIANT_MultiAgentRLCollisionAvoidance
    ```
 
-2. Create and activate a virtual environment:
+2. Create a virtual environment and install the pinned dependencies:
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-
-3. Install the required dependencies:
-   ```bash
+   python3 -m venv .venv && source .venv/bin/activate
    pip install -r requirements.txt
    ```
 
-4. (Optional) Install other environment dependencies such as simulation environments (e.g., VMAS) by following the instructions in `docs/INSTALL.md`.
+3. Install the native libraries required by VMAS and the RVO2 baseline:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y build-essential libgl1 libglu1-mesa libglib2.0-0 xvfb
+   ```
+
+   `xvfb` provides the virtual display, but it does not provide GLU. The `libglu1-mesa` package is required because VMAS imports pyglet's OpenGL renderer at startup.
+
+4. Headless machines: the simulator (VMAS) opens an X display at import time. Prefix training/evaluation commands with `xvfb-run -a`, or start a persistent virtual display:
+   ```bash
+   Xvfb :99 -screen 0 1280x1024x24 & export DISPLAY=:99
+   ```
+
+5. Alternatively use the Docker environment — see [`docker/README.md`](docker/README.md). The Dockerfile installs the native OpenGL and Xvfb packages automatically.
+
+Verify the install without a GPU or display:
+```bash
+python3 -m pytest tests/test_config.py tests/test_config_examples.py tests/test_action_scaler.py -q
+```
 
 ## Usage
 
-To run the training script, use the following command:
+Start standard from-scratch training with the full-fidelity baseline config:
 ```bash
-python3 train.py --config config.yaml
+xvfb-run -a python3 -m train.LidarSingleStep --config configs/baseline.yaml
+```
+Training logs to the Weights & Biases project `giant` when `WANDB_API_KEY` is set in the environment, and falls back to file logging otherwise.
+
+For a quick installation and configuration check, run the small smoke test:
+```bash
+xvfb-run -a python3 -m train.LidarSingleStep --config configs/smoke.yaml
 ```
 
-To evaluate the trained model in a specific environment, run:
+For adaptive multi-stage training, use the curriculum config:
 ```bash
-python3 eval.py --env random
+xvfb-run -a python3 -m train.LidarSingleStep --config configs/curriculum.yaml
 ```
+
+The attention-enabled model uses `gnn_attention: emb` by default. The
+`configs/finetune_attention.yaml` config is for fine-tuning an existing
+checkpoint, not for starting a new training run.
+
+Evaluate the trained model across the paper scenarios and agent-count sweeps defined in
+`configs/eval.yaml`:
+```bash
+xvfb-run -a python3 -m evaluate.eval_LidarSingleStep \
+   --config configs/eval.yaml \
+   --checkpoint models/checkpoints/ours/OurGraphModel.pth \
+   --no-video \
+   --output-dir results/eval
+```
+
+For some of the higher agent environments might be crashing out, use fewer parallel environments by overwriting and targeting a specific scenario:
+```bash
+xvfb-run -a python3 -m evaluate.eval_LidarSingleStep \
+   --config configs/eval.yaml \
+   --checkpoint models/checkpoints/ours/OurGraphModel.pth \
+   --scenario random \
+   --num-agents 40 \
+   --num-eval-envs 4 \
+   --no-video \
+   --output-dir results/eval_random_40
+```
+
+Print a comparison table of selected results, or regenerate the paper videos:
+```bash
+python3 -m evaluate.compare_models
+xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
+```
+
+## Baselines
+
+- **Python-RVO2 (NH-ORCA)** — included as a git submodule under `models/baseline/Python-RVO2`; build it by following the README inside the submodule.
+- **DRL-Nav** — pretrained checkpoint included under `models/checkpoints/NAV_DRL/`.
+- **GA3C-CADRL** — relies on TensorFlow 1.5.0, which requires Python 3.6. To run this baseline, set up a separate Python 3.6 environment with TensorFlow 1.5.0 (checkpoints under `models/checkpoints/GA3C_CADRL/`; served to the simulator via `models/baseline/GA3C_CADRL/zmq_server.py`). Everything else in the repository runs on modern Python and PyTorch.
 
 ## Project Structure
 ```
-├── evaluate/                  # Evaluation scripts and results
-│   ├── results/               # Evaluation results (created during runtime)
+├── configs/                   # Declarative YAML configs for training, evaluation, and videos
+├── docker/                    # Compose-based dev environment (CUDA/torch/vmas stack)
+├── evaluate/                  # Evaluation scripts
 │   ├── compare_models.py      # Print table of selected results from the results folder
-│   ├── evaluate.py            # Running the evaluation script (remember to change the config in this file if needed)
-│   └── generate_videos.py     # Just focusing on videos, not the results.
+│   ├── eval_LidarSingleStep.py# Run config-driven evaluation
+│   └── paper_videos.py        # Regenerate the paper videos
 ├── models/                    # Models and policies for training and evaluation
-│   ├── baseline/              # Baseline models (GA3C_CADRL, RVO2, DRLNav)
-│   ├── checkpoints/           # Checkpoints for saving models
+│   ├── baseline/              # Baseline models (GA3C_CADRL, RVO2, DRL-Nav)
+│   ├── checkpoints/           # Pretrained checkpoints (git LFS)
 │   ├── distributions.py       # Distributions utility for models
 │   ├── model_loader.py        # Utility to load models
-│   └── MultiAgentModel.py     # Our neural networks
+│   └── MultiAgentLidarModel.py# Our neural networks
 ├── scenario/                  # Scenarios for simulation and evaluation
-│   ├── GlobalPlanner/         # Global path planning algorithm used in scenarios
-│   ├── PaperScenarios/        # Scenarios used for showcasing the problem and not used in the evaluation
-|   └── all scenarios .py      # All scenarios used in this paper (separated into different files).
-├── sensors/                   # Sensor handling scripts (e.g., LiDAR for collision avoidance)
-├── train/                     # Training scripts and utilities
-│   ├── results/               # Training results (created during runtime)
-│   └── utils/                 # Utility scripts for logging, loss functions, etc.
-│   └── train.py               # Main script to start training (remember to change the config in this file if needed)
-└── requirements.txt           # Required Python packages
+│   ├── GlobalPlanner/         # Global path planning used in the scenarios
+│   ├── PaperScenarioes/       # Scenarios used for showcasing the problem (not in the evaluation)
+│   └── CollisionAvoidance_*.py# All scenarios used in the paper (one file per scenario)
+├── scripts/                   # Native install script
+├── tests/                     # Regression test suite (shape contracts and invariants)
+├── train/                     # Training entry point and utilities
+│   ├── utils/                 # Logging, loss functions, curriculum, schedulers
+│   └── LidarSingleStep.py     # Main training script
+└── requirements.txt           # Pinned Python dependencies
 ```
 
 ## Links
 
-- **Paper**: [Download the paper here](https://arxiv.org/pdf/2603.04659)  
+- **Paper**: [Download the paper here](./path-to-your-paper.pdf)
 - **Video**: [Watch the presentation video here](https://www.youtube.com/watch?v=42iTlEm0_Bk)
 
 ## Contributing

@@ -1,0 +1,4 @@
+# Variant: bump learning rate. For sweep seeding / hypothesis: faster early-stage learning.
+ppo:
+  lr_start: 5.0e-5
+  lr_end: 5.0e-5

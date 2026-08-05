@@ -1,0 +1,33 @@
+# Default config for evaluate/paper_videos.py (showcase videos for the paper).
+#
+# Usage:
+#   python -m evaluate.paper_videos --config configs/paper_videos.yaml
+#
+# Precedence (later wins): script defaults < this file < explicit CLI flags.
+# These parameters are for *showcasing* the model in small, problem-focused
+# environments; they are not the training or quantitative-evaluation settings
+# (use configs/eval.yaml for those).
+
+# --- Which model to render ---------------------------------------------------
+checkpoint: models/checkpoints/ours/OurGraphModel.pth
+model_type: oursGraph        # oursGraph | oursD | oursDV | baseline | RVO | GA3CPolicy
+
+# --- What to render ----------------------------------------------------------
+scenarios: [random, circle, doorway, hallway]   # also: corridor, room, localMinima, GPFocus
+num_agents: null             # null -> use each scenario's own agent counts
+max_steps: null              # null -> use the script default
+
+# --- Runtime ----------------------------------------------------------------
+device: cuda:0               # cuda:0 | cpu
+seed: 0
+save_video: true
+output_dir: null             # null -> current working directory
+
+# --- Advanced: deep overrides merged into the base `config` dict -------------
+config:
+  gnn_attention: emb
+
+# --- Advanced: per-scenario overrides merged into `scenario_config` ----------
+scenario_config: {}
+#   random:
+#     num_agents: [40]
