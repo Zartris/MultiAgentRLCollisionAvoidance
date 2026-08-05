@@ -141,7 +141,7 @@ xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 ├── docker/                    # Compose-based dev environment (CUDA/torch/vmas stack)
 ├── evaluate/                  # Evaluation scripts
 │   ├── compare_models.py      # Print table of selected results from the results folder
-│   ├── eval_LidarSingleStep.py# Run the evaluation (config set inside the file)
+│   ├── eval_LidarSingleStep.py# Run config-driven evaluation
 │   └── paper_videos.py        # Regenerate the paper videos
 ├── models/                    # Models and policies for training and evaluation
 │   ├── baseline/              # Baseline models (GA3C_CADRL, RVO2, DRL-Nav)

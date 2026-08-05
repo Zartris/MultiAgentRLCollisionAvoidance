@@ -1,0 +1,16 @@
+.git
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+results
+wandb
+models/checkpoints
+docs
+tests
+.claude
+.vscode
+.devcontainer
+docker/.env

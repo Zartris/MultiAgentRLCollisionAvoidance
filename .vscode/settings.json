@@ -19,6 +19,6 @@
         "editor.formatOnSave": true
     },
     "python.languageServer": "Default",
-    "python.pythonPath": "${workspaceFolder}/.venv/bin/python3.10",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "C_Cpp.intelliSenseEngineFallback": "enabled",
 }

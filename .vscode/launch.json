@@ -8,7 +8,8 @@
             "name": "Python: LidarSingleStep",
             "type": "python",
             "request": "launch",
-            "program": "train/LidarSingleStep.py",
+            "module": "train.LidarSingleStep",
+            "args": ["--config", "configs/baseline.yaml"],
             "console": "integratedTerminal",
             "justMyCode": false
         },
@@ -16,7 +17,8 @@
             "name": "Python: LidarSingleStep.py (No Debug)",
             "type": "python",
             "request": "launch",
-            "program": "train/LidarSingleStep.py",
+            "module": "train.LidarSingleStep",
+            "args": ["--config", "configs/baseline.yaml"],
             "console": "integratedTerminal",
             "justMyCode": false,
             "noDebug": true
@@ -27,14 +29,20 @@
             "request": "launch",
             "module": "cProfile",
             "args": [
-                "-o", "/tmp/tmp.prof", "train/LidarSingleStep.py"
+                "-o", "/tmp/tmp.prof", "-m", "train.LidarSingleStep",
+                "--config", "configs/baseline.yaml"
             ]
         },
         {
             "name": "Python: eval_LidarSingleStep",
             "type": "python",
             "request": "launch",
-            "program": "evaluate/eval_LidarSingleStep.py",
+            "module": "evaluate.eval_LidarSingleStep",
+            "args": [
+                "--config", "configs/eval.yaml",
+                "--checkpoint", "models/checkpoints/ours/OurGraphModel.pth",
+                "--no-video"
+            ],
             "console": "integratedTerminal",
             "justMyCode": false
         },
