@@ -1,0 +1,17 @@
+# Tiny config for smoke tests — 2 iters, small batches, no wandb.
+# Useful to verify a fresh checkout trains at all before committing to a real run.
+
+num_worlds: 8
+logging_backend: none
+log: false
+save_video_to_disk: false
+scenario_type: random   # single scenario to avoid multi's extra spawn complexity
+num_agents: 4
+num_obstacles: 3
+num_lidar_rays: 60
+
+ppo:
+  n_iters: 2
+  max_steps: 50
+  num_epochs: 1
+  minibatch_size: 50

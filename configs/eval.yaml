@@ -1,0 +1,39 @@
+# Default evaluation config for evaluate/eval_LidarSingleStep.py.
+#
+# Usage:
+#   python -m evaluate.eval_LidarSingleStep --config configs/eval.yaml
+#
+# Precedence (later wins): script defaults < this file < explicit CLI flags.
+# So you can keep a base here and tweak per run, e.g.:
+#   python -m evaluate.eval_LidarSingleStep --config configs/eval.yaml --scenario random
+
+# --- Which model to evaluate -------------------------------------------------
+checkpoint: models/checkpoints/ours/OurGraphModel.pth
+model_type: oursGraph        # oursGraph | oursD | oursDV | baseline | RVO | GA3CPolicy
+
+# --- What to run -------------------------------------------------------------
+scenarios: [random, doorway, hallway, room]
+num_agents: null             # null -> use each scenario's own agent counts (below)
+max_steps: 1200              # 1200 steps * 0.1 s = 120 s episodes
+num_eval_envs: 10
+
+# --- Runtime ----------------------------------------------------------------
+device: cuda:0               # cuda:0 | cpu
+seed: 0
+save_video: true
+output_dir: results/eval
+
+# --- Advanced: deep overrides merged into the base eval `config` dict --------
+# Any key from eval_LidarSingleStep.py's `config` (lidar/reward/render settings).
+config: {}
+#   lidar_noise: 0.035
+#   other_agent_noise: 0.1
+#   render_lidar: false
+
+# --- Advanced: per-scenario overrides merged into `scenario_config` ----------
+# Each scenario's agent-count sweep and world settings.
+scenario_config: {}
+#   random:
+#     num_agents: [10, 20, 40]
+#   doorway:
+#     num_agents: [5, 10, 15]

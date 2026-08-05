@@ -1,0 +1,3 @@
+[submodule "models/baseline/Python-RVO2"]
+	path = models/baseline/Python-RVO2
+	url = https://github.com/mit-acl/Python-RVO2/

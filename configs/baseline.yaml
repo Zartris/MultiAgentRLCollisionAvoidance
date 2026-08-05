@@ -1,0 +1,22 @@
+# Baseline config for LidarSingleStep training runs.
+# Only put overrides here — everything not set falls back to train/config.py::build_default_config().
+# This file SHOULD track the authoritative defaults so an agent can clone it as a starting point.
+
+# Larger worlds / longer episodes = the "full fidelity" training used in the paper.
+num_worlds: 150
+ppo:
+  n_iters: 2000
+  max_steps: 400
+  lr_start: 2.0e-5
+  lr_end: 2.0e-5
+  minibatch_size: 50
+  num_epochs: 10
+
+# Which scenario mix.
+scenario_type: multi
+model: oursGraph
+
+# Logging — wandb is the default, agent runs use the user's API key.
+logging_backend: wandb
+log: true
+save_video_to_disk: true

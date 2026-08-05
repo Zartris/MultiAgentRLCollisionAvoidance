@@ -1,0 +1,53 @@
+colorama==0.4.6 # For colored terminal output
+# Torch is a little special as it depends on the system you are using and the version of CUDA you have installed
+# Pinned to newest torch compatible with CUDA 12.8 (docker base: nvidia/cuda:12.8.1-cudnn-runtime-ubuntu24.04)
+torch==2.11.0
+# torchaudio # Not needed
+# torchvision # Not needed
+
+wandb==0.26.0 # For logging
+numba==0.65.0 # We are using numba a lot for speedup of pathfinding algorithms
+numpy==2.4.4 # For numerical operations
+moviepy==2.2.1 # For video rendering (used in wandb / torchrl)
+torch_geometric==2.7.0 # For graph neural networks
+# torchrl 0.11.1 renamed env.unbatched_action_spec -> env.full_action_spec_unbatched
+# (see models/model_loader.py) and the loss kwarg/buffer entropy_coef -> entropy_coeff
+# (see train/LidarSingleStep.py + train/utils/schedulers.py). log-prob key format and
+# private imports did not require code changes for our usage.
+torchrl==0.11.1 # For reinforcement learning
+tensordict==0.11.0 # Pinned to match torchrl 0.11.1
+# Optional: pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+
+colorhash==2.3.0 # For consitant coloring agents based on their id
+opencv-python==4.13.0.92 # For image processing
+pillow==11.3.0 # For image processing
+
+pyglet==1.5.27 # For rendering (needs to be this old version for vmask to work)
+filterpy==1.4.5 # For Kalman filter (not used atm)
+open3d==0.19.0 # For processing lidar information (not used atm)
+
+# For GA3C-CADRL (tensorflow)
+# For tensorflow 1.5.0 communication between python 3.6 and the one you choose
+pyzmq==27.1.0 # For communication between python 3.6 and the one you choose
+
+
+# For the RVO2 library
+cython==3.2.4 # For compiling the RVO2 library
+cmake<4 # RVO2's CMakeLists requires CMake < 4 (uses legacy cmake_minimum_required). Tested with 3.31.10
+
+# Python-RVO2 is imported unconditionally by models/baseline/rvo_policy.py.
+# Use the mit-acl fork: rvo_policy.py calls setAgentCollabCoeff (NH-ORCA
+# collaboration coefficient), which only exists in that fork -- the standard
+# sybrenstuvel fork lacks it and the RVO baseline crashes at runtime.
+# Built from source (needs system g++ + cmake<4 from above). Its setup.py imports
+# Cython at build time without declaring it, so the build MUST reuse this env's
+# Cython instead of an isolated one -- hence --no-build-isolation:
+#   pip install --no-build-isolation git+https://github.com/mit-acl/Python-RVO2.git
+# The scripts/install.sh helper does this (and the venv) for you in one step.
+
+vmas==1.5.2 # Vectorized multi-agent simulator (upstream; previously a vendored fork)
+
+
+
+# Imported unconditionally by models/MultiAgentLidarModel.py — not optional
+line_profiler_pycharm==1.2.0 # For profiling code line by line
