@@ -163,9 +163,23 @@ xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 
 ## Links
 
-- **Paper**: [Download the paper here](./path-to-your-paper.pdf)
+- **Paper**: [Download the paper here](https://arxiv.org/pdf/2603.04659) [or here](https://ieeexplore.ieee.org/document/11246312)
 - **Video**: [Watch the presentation video here](https://www.youtube.com/watch?v=42iTlEm0_Bk)
 
+If you like this or use it please cite my paper:
+```
+@inproceedings{lefevre2025giant,
+  author    = {le Fevre Sejersen, Jonas and Suzumura, Toyotaro and Kayacan, Erdal},
+  booktitle = {2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  title     = {GIANT - Global Path Integration and Attentive Graph Networks for Multi-Agent Trajectory Planning},
+  year      = {2025},
+  pages     = {10556--10563},
+  keywords  = {Training, Adaptation models, Navigation, Trajectory planning,
+               Noise, Robustness, Graph neural networks, Collision avoidance,
+               Intelligent robots, Logistics},
+  doi       = {10.1109/IROS60139.2025.11246312}
+}
+```
 ## Contributing
 
 Contributions are welcome! Please submit a pull request with any improvements or bug fixes. For major changes, please open an issue first to discuss what you would like to change.
