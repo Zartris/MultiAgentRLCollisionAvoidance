@@ -1,3 +1,5 @@
+
+
 # GIANT - Global Path Integration and Attentive Graph Networks for Multi-Agent Trajectory Planning
 | <img src="docs/doorway_800x600.gif" alt="GIF 1" width="380"/> | <img src="docs/circle_800x600.gif" alt="GIF 2" width="380"/> |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
@@ -9,7 +11,7 @@ The main contributions of this work include:
 - We introduce a local navigation model that incorporates global path information within the observation space, enabling the agent to maintain adherence to pre-planned routes while reacting to dynamic changes in the environment.
 - The model employs graph structures to represent and manage interactions with neighboring agents using attentive graph neural networks, improving the robots’ ability to navigate dense environments.
 - The ability to navigate in complex, dynamic environments with noisy sensor data.
-- Superior performance when compared to other baselines like NH-OCRA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
+- Superior performance when compared to other baselines like NH-ORCA, DLR-NAV, and GA3C-CADRL in multiple simulated environments.
 
 ## Table of Contents
 - [Problem Statement](#problem-statement)
@@ -126,7 +128,7 @@ xvfb-run -a python3 -m evaluate.eval_LidarSingleStep \
 
 Print a comparison table of selected results, or regenerate the paper videos:
 ```bash
-python3 -m evaluate.compare_models
+python3 -m evaluate.compare_models --base-dir results/eval
 xvfb-run -a python3 -m evaluate.paper_videos --config configs/paper_videos.yaml
 ```
 
@@ -175,12 +177,12 @@ If you use this repository or build upon this work, please cite the following pa
   author    = {le Fevre Sejersen, Jonas and Suzumura, Toyotaro and Kayacan, Erdal},
   booktitle = {2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
   title     = {GIANT - Global Path Integration and Attentive Graph Networks for Multi-Agent Trajectory Planning},
-  year      = {2025},
-  pages     = {10556--10563},
-  keywords  = {Training, Adaptation models, Navigation, Trajectory planning,
+  year     = {2025},
+  pages    = {10556--10563},
+  keywords = {Training, Adaptation models, Navigation, Trajectory planning,
                Noise, Robustness, Graph neural networks, Collision avoidance,
                Intelligent robots, Logistics},
-  doi       = {10.1109/IROS60139.2025.11246312}
+  doi      = {10.1109/IROS60139.2025.11246312}
 }
 ```
 
